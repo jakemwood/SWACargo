@@ -187,10 +187,11 @@ class NFG implements Service {
 		}
 	}
 }
-
+/*
 var ezWaybill = new Waybill([new Package(26, 26, 26, 40), new Package(26, 26, 26, 40)],
 	new Airport('DEN', 5), new Airport('SJC', 6));
 
 console.log('NFG : $' + ezWaybill.cost(new NFG()));
 console.log('RUSH: $' + ezWaybill.cost(new RUSH()));
 console.log('Frgt: $' + ezWaybill.cost(new Freight()));
+*/
