@@ -33,6 +33,14 @@ class Package {
 	}
 }
 
+class InvoiceItem {
+	constructor(public description : string,
+				public cost : number) {
+
+	}
+}
+
+
 class Waybill {
 	constructor(public packages : Package[],
 				public origin : Airport,
@@ -82,6 +90,14 @@ class Waybill {
 
 	cost(service : Service) : number {
 		return this.getSurcharges() + service.cost(this);
+	}
+
+	invoice(service : Service) : InvoiceItem[] {
+		return [
+			new InvoiceItem("Service Charge", service.cost(this)),
+			new InvoiceItem("Security Surcharge", this.getSecuritySurcharge()),
+			new InvoiceItem("Fuel Surcharge", this.getFuelSurcharge())
+		];
 	}
 }
 

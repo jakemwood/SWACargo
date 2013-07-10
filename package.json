@@ -1,0 +1,6 @@
+{
+	"name": "SWACargo",
+	"dependencies": {
+		"prompt": "*"
+	}
+}
