@@ -4,9 +4,10 @@ class Airport {
 	}
 }
 
-interface Service {
-	cost(waybill : Waybill) : number;
-}
+var airports = {
+	'DEN': new Airport('DEN', 5),
+	'SJC': new Airport('SJC', 6)
+};
 
 class Package {
 
@@ -40,6 +41,9 @@ class InvoiceItem {
 	}
 }
 
+interface Service {
+	cost(waybill : Waybill) : number;
+}
 
 class Waybill {
 	constructor(public packages : Package[],
@@ -187,11 +191,10 @@ class NFG implements Service {
 		}
 	}
 }
-/*
-var ezWaybill = new Waybill([new Package(26, 26, 26, 40), new Package(26, 26, 26, 40)],
+
+var ezWaybill = new Waybill([new Package(26, 26, 26, 40)], /*, new Package(26, 26, 26, 40)], */
 	new Airport('DEN', 5), new Airport('SJC', 6));
 
 console.log('NFG : $' + ezWaybill.cost(new NFG()));
 console.log('RUSH: $' + ezWaybill.cost(new RUSH()));
 console.log('Frgt: $' + ezWaybill.cost(new Freight()));
-*/

@@ -1,6 +1,5 @@
 var prompt = require('prompt');
-require('require-typescript');
-var swacargo = require('./swacargo.ts');
+require('./swacargo.js');
 
 // Start the prompt
 prompt.start();
@@ -58,5 +57,6 @@ function convertPackages(pkg_data) {
 prompt.get(questions, function(err, basic_info) {
 	prompt.get(askPackages(basic_info.pkg_count), function(err, pkg_data) {
 		console.log(convertPackages(pkg_data));
+		new Waybill()
 	});
 });
