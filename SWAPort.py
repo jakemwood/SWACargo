@@ -11,6 +11,8 @@ class SWAPort(Airport):
 
 	@staticmethod
 	def code_to_airport(code):
+		# This is the list of Southwest airports based on their map...
+		# http://www.swacargo.com/swacargo/documents/2013CargoMap_AllDest-Zoned.pdf
 		airports = [
 			SWAPort("BOS", 1),
 			SWAPort("LGA", 1),
