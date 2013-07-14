@@ -12,6 +12,10 @@ class SWAPort(Airport):
 	@staticmethod
 	def code_to_airport(code):
 		airports = [
+			SWAPort("BOS", 1),
+			SWAPort("LGA", 1),
+			SWAPort("EWR", 1),
+			SWAPort("BWI", 1),
 			SWAPort("DEN", 5),
 			SWAPort("OMA", 5),
 			SWAPort("MSP", 5),
