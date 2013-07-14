@@ -1,0 +1,87 @@
+import locale
+from SWAServices import *
+from SWAWaybill import *
+from SWAPort import *
+from SWAPackage import *
+
+locale.setlocale(locale.LC_ALL, '')
+
+# Splash screen!
+print "                                          |"
+print "                                          |"
+print "     SOUTHWEST                            |"
+print "       CARGO                            .---."
+print "     CALCULATOR                        ' ___ '"
+print "                             ---------'  .-.  '---------"
+print "             _________________________'  '-'  '_________________________"
+print "              ''''''-|---|----/  \==][^',_m_,'^][==/  \----|---|-''''''"
+print "                              \__/        ~        \__/"
+print ""
+
+# Basic waybill information
+origin = raw_input("What airport are you shipping from? ")
+while 1:
+	try:
+		origin = SWAPort.code_to_airport(origin)
+		break
+	except:
+		origin = raw_input("Sorry, we can't find that airport.  Try another one? : ")
+
+destination =   raw_input("What airport are you shipping to?   ")
+while 1:
+	try:
+		destination = SWAPort.code_to_airport(destination)
+		break
+	except:
+		destination = raw_input("Sorry, we can't find that airport.  Try another one? : ")
+
+package_count = raw_input("How many packages are you shipping? ")
+while 1:
+	if package_count.isdigit():
+		break
+	else:
+		package_count = raw_input("Please input a number. : ")
+
+print ""
+print "What level of service do you want?  Your options are..."
+print "    ** Next Flight Guarantee (type \"NFG\")"
+print "    ** RUSH Service (type \"RUSH\")"
+print "    ** Freight Service (type \"Freight\")"
+
+while 1:
+	service = raw_input("")
+	if (service == 'NFG'):
+		service = NextFlight()
+	elif (service == 'RUSH'):
+		service = Rush()
+	elif (service == 'Freight'):
+		service = Freight()
+	else:
+		print "Sorry, that was an invalid level of service."
+		continue
+	break
+
+# Package data collection
+packages = []
+for i in range(int(package_count)):
+	print ""
+	print "PACKAGE " + str(i + 1) + " DETAILS"
+	length = int(raw_input("Length: "))
+	width  = int(raw_input("Width : "))
+	height = int(raw_input("Height: "))
+	weight = int(raw_input("Weight: "))
+	packages.append(SWAPackage(length, width, height, weight))
+
+# Create the waybill...
+waybill = SWAWaybill(origin, destination, service, packages)
+
+# Generate the invoice...
+invoice = waybill.invoice()
+print "============================================================="
+print "SOUTHWEST CARGO CALCULATOR ESTIMATE"
+print ""
+
+for line in invoice:
+	print ('{:' + str(max(len(line.description) for line in invoice)) + 's} - {}').format(line.description, locale.currency(line.charge, grouping = True))
+
+print ('{:' + str(max(len(line.description) for line in invoice)) + 's} - {}').format("TOTAL", locale.currency(sum(line.charge for line in invoice), grouping = True))
