@@ -80,6 +80,52 @@ class Rush(Service):
 		return packages
 
 class Freight(Service):
+
+	minimum_table = {
+		1: { 1: 45, 2: 45, 3: 45, 4: 45, 5: 45, 6: 50, 7: 50 },
+		2: { 1: 45, 2: 45, 3: 45, 4: 45, 5: 45, 6: 45, 7: 45 },
+		3: { 1: 45, 2: 45, 3: 45, 4: 45, 5: 45, 6: 50, 7: 50 },
+		4: { 1: 45, 2: 45, 3: 45, 4: 45, 5: 45, 6: 45, 7: 45 },
+		5: { 1: 45, 2: 45, 3: 45, 4: 45, 5: 45, 6: 45, 7: 45 },
+		6: { 1: 50, 2: 45, 3: 50, 4: 45, 5: 45, 6: 45, 7: 45 },
+		7: { 1: 50, 2: 45, 3: 50, 4: 45, 5: 45, 6: 45, 7: 45 }
+	}
+
+	cost_table = {
+		1: { 1: 0.51, 2: 0.59, 3: 0.58, 4: 0.63, 5: 0.61, 6: 0.93, 7: 0.93 },
+		2: { 1: 0.58, 2: 0.51, 3: 0.58, 4: 0.59, 5: 0.55, 6: 0.63, 7: 0.63 },
+		3: { 1: 0.58, 2: 0.58, 3: 0.50, 4: 0.57, 5: 0.62, 6: 0.93, 7: 0.93 },
+		4: { 1: 0.63, 2: 0.62, 3: 0.59, 4: 0.58, 5: 0.59, 6: 0.63, 7: 0.64 },
+		5: { 1: 0.61, 2: 0.55, 3: 0.62, 4: 0.59, 5: 0.51, 6: 0.63, 7: 0.63 },
+		6: { 1: 0.93, 2: 0.63, 3: 0.93, 4: 0.64, 5: 0.63, 6: 0.51, 7: 0.51 },
+		7: { 1: 0.93, 2: 0.64, 3: 0.93, 4: 0.63, 5: 0.63, 6: 0.50, 7: 0.48 }
+	}
+
+	heavy_table = {
+		1: { 1: 0.51, 2: 0.59, 3: 0.58, 4: 0.63, 5: 0.61, 6: 0.93, 7: 0.93 },
+		2: { 1: 0.58, 2: 0.51, 3: 0.58, 4: 0.59, 5: 0.55, 6: 0.63, 7: 0.63 },
+		3: { 1: 0.58, 2: 0.58, 3: 0.50, 4: 0.57, 5: 0.62, 6: 0.93, 7: 0.93 },
+		4: { 1: 0.63, 2: 0.62, 3: 0.59, 4: 0.58, 5: 0.59, 6: 0.63, 7: 0.64 },
+		5: { 1: 0.61, 2: 0.55, 3: 0.62, 4: 0.59, 5: 0.51, 6: 0.63, 7: 0.63 },
+		6: { 1: 0.93, 2: 0.63, 3: 0.93, 4: 0.64, 5: 0.63, 6: 0.51, 7: 0.51 },
+		7: { 1: 0.93, 2: 0.64, 3: 0.93, 4: 0.63, 5: 0.63, 6: 0.50, 7: 0.48 }
+	}
+
 	@staticmethod
-	def cost(waybill):
-		return 0
+	def ratePackage(waybill, package):
+		if (package.billableWeight() > 300):
+			# use the 300 pound table
+			rate_table = heavy_table
+		else:
+			# use the cheaper table
+			rate_table = cost_table
+
+		return min(rate_table[waybill.origin.zone][waybill.destination.zone] * package.billableWeight(), \
+			minimum_table[waybill.origin.zone][waybill.destination.zone])
+
+	@staticmethod
+	def invoice(waybill):
+		packages = []
+		for package in waybill.packages:
+			packages.append(InvoiceLine("Freight Service", Freight.ratePackage(waybill, package)))
+		return packages

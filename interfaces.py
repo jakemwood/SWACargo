@@ -9,7 +9,7 @@ class Airport:
 A class of cargo service offered by an airline
 """
 class Service():
-	def cost(package):
+	def cost(waybill):
 		pass
 
 """
