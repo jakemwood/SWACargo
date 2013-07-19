@@ -14,10 +14,11 @@ class SWAPort(Airport):
 		# This is the list of Southwest airports based on their map...
 		# http://www.swacargo.com/swacargo/documents/2013CargoMap_AllDest-Zoned.pdf
 		airports = [
-			SWAPort("BOS", 1),
-			SWAPort("LGA", 1),
-			SWAPort("EWR", 1),
-			SWAPort("BWI", 1),
+			SWAPort("BOS", 1), # Boston
+			SWAPort("LGA", 1), # LaGuardia
+			SWAPort("EWR", 1), # Newark
+			SWAPort("BWI", 1), # Baltimore
+			SWAPort("MDW", 2), # Midway
 			SWAPort("DEN", 5), # Denver
 			SWAPort("OMA", 5), # Omaha
 			SWAPort("MSP", 5), # Minneapolis / St Paul
