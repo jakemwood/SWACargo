@@ -5,7 +5,4 @@ class SWAPackage(Package):
 		return self.length * self.width * self.height / 194
 
 	def billableWeight(self):
-		if (self.dimensionalWeight() > self.weight):
-			return self.dimensionalWeight()
-		else:
-			return self.weight
+		return max(self.dimensionalWeight(), self.weight)

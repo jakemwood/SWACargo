@@ -23,7 +23,14 @@ class SWAPort(Airport):
 			SWAPort("MSP", 5),
 			SWAPort("MCI", 5),
 			SWAPort("STL", 5),
-			SWAPort("SJC", 6)
+			SWAPort("SJC", 6), # San Jose
+			SWAPort("SEA", 7), # Seattle
+			SWAPort("GEG", 7), # Spokane
+			SWAPort("PDX", 7), # Portland
+			SWAPort("BOI", 7), # Boise
+			SWAPort("YVR", 7), # Vancouver
+			SWAPort("YEG", 7), # Edmonton
+			SWAPort("YYC", 7) # Calgary
 		]
 		try:
 			return next(airport for airport in airports if airport.code == code)
