@@ -18,12 +18,25 @@ class SWAPort(Airport):
 			SWAPort("LGA", 1),
 			SWAPort("EWR", 1),
 			SWAPort("BWI", 1),
-			SWAPort("DEN", 5),
-			SWAPort("OMA", 5),
-			SWAPort("MSP", 5),
-			SWAPort("MCI", 5),
-			SWAPort("STL", 5),
+			SWAPort("DEN", 5), # Denver
+			SWAPort("OMA", 5), # Omaha
+			SWAPort("MSP", 5), # Minneapolis / St Paul
+			SWAPort("MCI", 5), # Kansas City
+			SWAPort("STL", 5), # St Louis
+			SWAPort("SMF", 6), # Sacramento
+			SWAPort("SFO", 6), # San Francisco
+			SWAPort("OAK", 6), # Oakland
 			SWAPort("SJC", 6), # San Jose
+			SWAPort("BUR", 6), # Burbank
+			SWAPort("LAX", 6), # Los Angeles
+			SWAPort("ONT", 6), # Ontario, California
+			SWAPort("SNA", 6), # Orange County Airport
+			SWAPort("SAN", 6), # San Diego
+			SWAPort("RNO", 6), # Reno / Tahoe
+			SWAPort("LAS", 6), # Las Vegas
+			SWAPort("SLC", 6), # Salt Lake City
+			SWAPort("PHX", 6), # Phoenix
+			SWAPort("TUS", 6), # Tucson
 			SWAPort("SEA", 7), # Seattle
 			SWAPort("GEG", 7), # Spokane
 			SWAPort("PDX", 7), # Portland
