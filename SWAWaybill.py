@@ -17,7 +17,10 @@ class SWAWaybill(Waybill):
 
 	def invoice(self):
 		invoice = self.service.invoice(self)
-		invoice.append(InvoiceLine("Security Surcharge", self.securitySurcharge()))
 		invoice.append(InvoiceLine("Fuel Surcharge", self.fuelSurcharge()))
+		# Based on the quote I received from the SWA rep, the security
+		# surcharge is not included in the federal tax.
+		invoice.append(InvoiceLine("Federal Tax - 6.25%", 0.0625 * sum(line.charge for line in invoice)))
+		invoice.append(InvoiceLine("Security Surcharge", self.securitySurcharge()))
 
 		return invoice
