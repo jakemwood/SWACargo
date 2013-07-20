@@ -105,13 +105,13 @@ class Freight(Service):
 	def ratePackage(waybill, package):
 		if (package.billableWeight() > 300):
 			# use the 300 pound table
-			multiplier = cost_table[waybill.origin.zone][waybill.destination.zone] - 0.03
+			multiplier = Freight.cost_table[waybill.origin.zone][waybill.destination.zone] - 0.03
 		else:
 			# use the cheaper table
-			multiplier = cost_table[waybill.origin.zone][waybill.destination.zone]
+			multiplier = Freight.cost_table[waybill.origin.zone][waybill.destination.zone]
 
 		return min(multiplier * package.billableWeight(), \
-			minimum_table[waybill.origin.zone][waybill.destination.zone])
+			Freight.minimum_table[waybill.origin.zone][waybill.destination.zone])
 
 	@staticmethod
 	def invoice(waybill):
