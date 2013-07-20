@@ -110,7 +110,7 @@ class Freight(Service):
 			# use the cheaper table
 			multiplier = Freight.cost_table[waybill.origin.zone][waybill.destination.zone]
 
-		return min(multiplier * package.billableWeight(), \
+		return max(multiplier * package.billableWeight(), \
 			Freight.minimum_table[waybill.origin.zone][waybill.destination.zone])
 
 	@staticmethod
