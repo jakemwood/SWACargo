@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+
 import locale
 from SWAServices import *
 from SWAWaybill import *
