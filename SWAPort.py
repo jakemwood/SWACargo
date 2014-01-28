@@ -19,6 +19,11 @@ class SWAPort(Airport):
 			SWAPort("EWR", 1), # Newark
 			SWAPort("BWI", 1), # Baltimore
 			SWAPort("MDW", 2), # Midway
+			SWAPort("MKE", 2), # Milwaukee
+			SWAPort("GRR", 2), # Grand Rapids
+			SWAPort("DTW", 2), # Detroit
+			SWAPort("CLE", 2), # Cleveland
+			SWAPort("CMH", 2), # Columbus
 			SWAPort("DEN", 5), # Denver
 			SWAPort("OMA", 5), # Omaha
 			SWAPort("MSP", 5), # Minneapolis / St Paul
